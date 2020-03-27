@@ -4,5 +4,9 @@ venv/
 # IntelliJ project files
 .idea
 *.iml
-out
-gen
+__pycache__
+
+# Django
+db.sqlite3
+/static
+.DS_Store
