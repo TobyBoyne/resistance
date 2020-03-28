@@ -6,7 +6,7 @@
         <div class="date">
             <p>published: {{ game.published_date }}</p>
         </div>
-        <h2><a href="">{{ game.title }}</a></h2>
+        <h2><a href="{% url 'game_page' pk=game.pk %}">{{ game.title }}</a></h2>
     </div>
     {% endfor %}
 {% endblock %}
