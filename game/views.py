@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import GameInstance
+from .forms import NewGameForm
 from django.utils import timezone
 
 
@@ -10,3 +11,7 @@ def game_list(request):
 def game_page(request, pk):
     game = get_object_or_404(GameInstance, pk=pk)
     return render(request, 'game/game_page.html', {'game':game})
+
+def new_game(request):
+    form = NewGameForm()
+    return render(request, 'game/new_game.html', {'form': form})
