@@ -3,6 +3,8 @@ from .models import GameInstance
 from .forms import NewGameForm
 from django.utils import timezone
 
+from game_logic.main import GameHandler
+
 
 def game_list(request):
     games = GameInstance.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
@@ -10,6 +12,8 @@ def game_list(request):
 
 def game_page(request, pk):
     game = get_object_or_404(GameInstance, pk=pk)
+    game_handler = GameHandler()
+    game.text = game_handler.play()
     return render(request, 'game/game_page.html', {'game':game})
 
 def new_game(request):
