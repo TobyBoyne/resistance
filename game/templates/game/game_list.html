@@ -1,10 +1,24 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'css/game.css' %}">
     <meta charset="UTF-8">
     <title>Game List</title>
 </head>
 <body>
-Test
+    <div class="page-header">
+        <h1>Game List</h1>
+    </div>
+
+    {% for game in games %}
+    <div class="game-instance">
+        <p>published: {{ game.published_date }}</p>
+        <h2><a href="">{{ game.title }}</a></h2>
+    </div>
+    {% endfor %}
+
 </body>
 </html>
