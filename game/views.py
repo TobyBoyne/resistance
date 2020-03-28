@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import GameInstance
 from .forms import NewGameForm
 from django.utils import timezone
@@ -13,5 +13,14 @@ def game_page(request, pk):
     return render(request, 'game/game_page.html', {'game':game})
 
 def new_game(request):
-    form = NewGameForm()
+    if request.method == "POST":
+        form = NewGameForm(request.POST)
+        if form.is_valid():
+            game = form.save(commit=False)
+            game.author = request.user
+            game.published_date = timezone.now()
+            game.save()
+            return redirect('game_page', pk=game.pk)
+    else:
+        form = NewGameForm()
     return render(request, 'game/new_game.html', {'form': form})
